@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+
+{%block main_block%}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-3"></div>
+        <div class="col-6">
+            {{message}}
+            <form action="" method="post" class="border border-2 p-4 shadow">
+                <h3 class="text-center my-2">ADD CATEGORY</h3>
+                {%csrf_token%}
+                {{form}}
+                <button type="submit" class="btn btn-success mt-3">Add</button>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <table class="table table-dark">
+                <tr>
+                    <th>CategoryName</th>
+                    <th>Budget</th>
+                    <th>Owner</th>
+                    <th>Action</th>
+                </tr>
+                {%for cat in categories%}
+
+                    <tr>
+                        <td>{{cat.name}}</td>
+                        <td>{{cat.budget}}</td>
+                        <td>{{cat.owner}}</td>
+                        <td>
+                            <a href="{%url 'category-edit' cat.id%}" class="btn btn-outline-warning">Edit</a>
+                        </td>
+                    </tr>
+                {%endfor%}
+
+            </table>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+
+{%endblock%}
